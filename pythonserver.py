@@ -18,7 +18,7 @@ def returnRoute():
         
         routes = handler.readRouteFromFile()
         routes2 = handler.readRoutesFromFolder()
-        print(routes2[100])
+        print(routes)
         
         return jsonify(result=routes)	
     
