@@ -17,6 +17,8 @@ def returnRoute():
         lang = request.args.get('request_type', 0, type=str)
         
         routes = handler.readRouteFromFile()
+        routes2 = handler.readRoutesFromFolder()
+        print(routes2[100])
         
         return jsonify(result=routes)	
     
