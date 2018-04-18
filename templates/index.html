@@ -1,0 +1,33 @@
+
+
+<HTML>
+
+<head>
+<script>
+var map;
+</script
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
+<script>window.jQuery || document.write('<script src="{{
+  url_for('static', filename='jquery.js') }}">\x3C/script>') 
+  </script>
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='test.css') }}">
+
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMRZn-B5chEqKJtJBeTekVDUTwLhjkWC0&callback=initMap">
+</script>
+
+
+</head>
+
+<body>
+
+<div id="map"></div>
+
+<input type = "button" value= "Add route" onClick = "drawRoute()">
+
+<!-- Replace the value of the key parameter with your own API key. -->
+
+</body>
+	</HTML>

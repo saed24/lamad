@@ -14,6 +14,20 @@ function initMap() {
 	
 }
 
+function drawLine(data)
+{
+		
+        var line = new google.maps.Polyline({
+		path: data,
+		strokeColor: "#FF0000",
+		strokeOpacity: 1.0,
+		strokeWeight: 10,
+		geodesic: true,
+		map: map});
+	
+	
+}
+
 function drawRoute(){	
 	var jsonParameters={};
 	
@@ -22,18 +36,12 @@ function drawRoute(){
 	var path;
 	para=JSON.stringify(jsonParameters);	
 	
-	$.post("server.php", { data: para })
-    .done(function(data) {
-		var paths= eval("(" + data + ")");
-		console.log(paths.length);
-        var line = new google.maps.Polyline({
-		path: paths,
-		strokeColor: "#FF0000",
-		strokeOpacity: 1.0,
-		strokeWeight: 10,
-		geodesic: true,
-		map: map});
-    });
-	
+	$.getJSON('/get_route', {
+		request_type: "test",
+		}, function(data) {
+			
+				drawLine(data.result);
+				
+			});
 	
 }
