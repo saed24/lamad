@@ -7,7 +7,7 @@ Created on Wed Apr 18 11:00:58 2018
 import os    
 import datetime
 
-path = 'C:/Users/Raheel/PathPrediction/MopsiRoutes2014/routes/1/'
+path = './MopsiRoutes2014/routes/1/'
 counter=0
 routes = []
 

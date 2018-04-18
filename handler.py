@@ -25,12 +25,12 @@ def readRouteFromFile():
                 points['alt'] = temp[3]
                 
                 routes.append(points)
-    print(routes)            
+    #print(routes)            
     return routes
 
 
 def readRoutesFromFolder():
-    path = 'C:/Users/Raheel/PathPrediction/MopsiRoutes2014/routes/1/'
+    path = './MopsiRoutes2014/routes/1/'
     counter=0
     routes2 = []    
     for filename in os.listdir(path):
