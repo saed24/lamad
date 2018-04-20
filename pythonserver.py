@@ -3,6 +3,7 @@ import sys
 from flask import Flask, render_template, request, redirect, Response, jsonify, make_response
 import random, json
 import handler as handler
+import osrm as osrm
 
 app = Flask(__name__)
 
@@ -15,9 +16,11 @@ def output():
 def returnRoute():
     try:
         lang = request.args.get('request_type', 0, type=str)
+      
+        startPoint = {'lat': '60.1699', 'lng': '24.9384'}
+        endPoint = {'lat': '60.2055', 'lng': '24.6559'}
         
-        routes = handler.readRouteFromFile()
-        routes2 = handler.readRoutesFromFolder()
+        routes = osrm.getRoutesFromOSRM(startPoint, endPoint, "driving")
         print(routes)
         
         return jsonify(result=routes)	
