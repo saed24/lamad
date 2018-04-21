@@ -23,14 +23,13 @@ def addPointsToDict(user):
     path = './MopsiRoutes2014/routes/'+user
     dicts = {}
     for filename in os.listdir(path):
-        route = handler.readRouteFromFile(path+filename)
+        print(filename)
+        route = handler.readRouteFromFile(path+'/'+filename)
         
         grid=GridPy.pointsToWGSCells(route,111)
         addToDict(dicts, grid)
     
     return dicts
-
-print(addPointsToDict())
         
 
 
