@@ -16,6 +16,7 @@ function initMap() {
 
 function drawLine(data)
 {
+		console.log(data);
 		
         var line = new google.maps.Polyline({
 		path: data,

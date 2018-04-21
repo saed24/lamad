@@ -16,18 +16,32 @@ import json
 #r = urlopen("".join("))
 
 
-def getRoutesFromOSRM(startPoint, endPoint, alternatives, mode):
+def getRoutesFromOSRM(startPoint, endPoint, mode):
     
-    url = 'http://router.project-osrm.org/route/v1/'+ mode+'/'+ startPoint['lng'] + ','+startPoint['lat'] +'\
-    ;' +endPoint['lng'] + ','+ endPoint['lat']+ '?alternatives='+alternatives+'&geometries=geojson'
+    url = 'http://router.project-osrm.org/route/v1/'+ mode+'/'+ startPoint['lat'] + ','+startPoint['lng'] +'\
+    ;' +endPoint['lat'] + ','+ endPoint['lng']+ '?alternatives=2&geometries=geojson'
 
     rep = urlopen(''.join(url))
     parsed_json = json.loads(rep.read().decode('utf-8'))
     print(parsed_json)
-    return parsed_json['routes'][0]['geometry']['coordinates']
+    return parseCoordinates(parsed_json['routes'][0]['geometry']['coordinates'])
 #response = urllib.request.urlopen(req).read()
 
-startPoint = {'lng': '62', 'lat': '28'}
-endPoint = {'lng': '62', 'lat': '27.5'}
 
-getRoutesFromOSRM(startPoint, endPoint, '3', 'walking')
+def parseCoordinates(coord):
+    
+    route = []
+    
+    for x,y in coord:
+        print(x)
+        print(y)
+        point = {}
+        
+        point['lat'] = float(x)
+        point['lng'] = float(y)
+        route.append(point)
+    print(route)
+    return route    
+    
+
+

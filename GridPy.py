@@ -38,7 +38,7 @@ def pointsToWGSCells(points, zoomLevel):
             _map[_id] = 1
             cells.append(cell)
         prevCell = cell
-    print(_map)
+    #print(_map)
     return cells
 	
 def doWGSInterpolation(c1, c2, zoomLevel):
