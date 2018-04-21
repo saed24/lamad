@@ -9,8 +9,7 @@ import os
 
 R = 6373.0 # approximate radius of earth in km
 
-def readRouteFromFile():
-    filepath = '1216652978620'
+def readRouteFromFile(filepath):
     routes = []
     with open(filepath) as fp:
         line = fp.readline()
@@ -31,13 +30,14 @@ def readRouteFromFile():
 
 
 def readRoutesFromFolder():
-    path = './MopsiRoutes2014/routes/1/'
-    counter=0
-    routes2 = []    
+    path = './MopsiRoutes2014/routes/13/'
+    routes2 = []  
+    counter = 0  
     for filename in os.listdir(path):
-        counter=counter+1
+        counter = counter + 1
         with open(path+filename,"r") as fp:
             line = fp.readline()
+            
             while line:
                 points = {}
                 line = fp.readline()

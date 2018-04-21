@@ -17,10 +17,11 @@ def returnRoute():
     try:
         lang = request.args.get('request_type', 0, type=str)
       
-        startPoint = {'lat': '60.1699', 'lng': '24.9384'}
-        endPoint = {'lat': '60.2055', 'lng': '24.6559'}
+       # startPoint = {'lat': '60.1699', 'lng': '24.9384'}
+        #endPoint = {'lat': '60.2055', 'lng': '24.6559'}
         
-        routes = osrm.getRoutesFromOSRM(startPoint, endPoint, "driving")
+        #routes = osrm.getRoutesFromOSRM(startPoint, endPoint, "driving")
+        routes= handler.readRouteFromFile('MopsiRoutes2014/routes/1/1218029102019')
         print(routes)
         
         return jsonify(result=routes)	
