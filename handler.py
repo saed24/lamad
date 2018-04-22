@@ -103,4 +103,11 @@ def DividingRoute(routes, A, B):
     B=int (len(routes)*(B/100))
     return routes[A:B]
 
+def OuterRoute(routes, A, B):
+    A=DividingRoute(routes,1,A)
+    B=DividingRoute(routes,B,100)
+    mergelist= A+B
+    return mergelist
+
+
 
