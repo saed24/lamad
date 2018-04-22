@@ -8,7 +8,7 @@ import frequency as f
 
 app = Flask(__name__)
 filenames = ['1216464589688','1216468520320','1216481888112']
-
+route = []
 
 @app.route('/')
 def output():
@@ -44,10 +44,10 @@ def selectRoute():
         routeSel = int(routeSel)
         print(routeSel)
         
-        route = []
+        
         
         if(routeSel == 1):
-            print(filenames[0])
+           
             route = handler.readRouteFromFile(filenames[0])
         
         elif(routeSel == 2):

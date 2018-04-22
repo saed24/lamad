@@ -22,3 +22,7 @@ ProbabilityOFPrintingRoute, RouteToPrint, AlternativeRoute= handler.Probability(
 
 #print(directions[1])
 #directions[1]
+
+
+
+print(ProbabilityOFPrintingRoute)
