@@ -21,7 +21,7 @@ def returnRoute():
         #endPoint = {'lat': '60.2055', 'lng': '24.6559'}
         
         #routes = osrm.getRoutesFromOSRM(startPoint, endPoint, "driving")
-        routes= handler.readRouteFromFile('MopsiRoutes2014/routes/1/1218029102019')
+        routes= handler.readRouteFromFile('1218616715718')
         print(routes)
         
         return jsonify(result=routes)	
