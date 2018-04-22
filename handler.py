@@ -28,6 +28,22 @@ def readRouteFromFile(filepath):
     #print(routes)            
     return routes
 
+def readRouteFromFileWOTimeAndAlt(filepath):
+    routes = []
+    with open(filepath) as fp:
+        line = fp.readline()
+        while line:
+            points = {}
+            line = fp.readline()
+            temp = line.split(' ')
+                
+            if len(temp) == 4:
+                points['lat'] = float(temp[0])
+                points['lng'] = float(temp[1])
+                
+                routes.append(points)
+    #print(routes)            
+    return routes
 
 def readRoutesFromFolder():
     path = './MopsiRoutes2014/routes/13/'
