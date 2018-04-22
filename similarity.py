@@ -27,22 +27,4 @@ def getSimilarity(route1, route2):
     
     print(parsed_json)
 
-"""
-Testing
-route1 = handler.readRouteFromFileWOTimeAndAlt('1372602289525')
-route2 = handler.readRouteFromFileWOTimeAndAlt('1372604194383')
 
-r1 = []
-r2 = []
-for x in range(0,3):
-    point = {}
-    point = route1[x]
-    r1.append(point)
-    point = {}
-    point = route2[x]
-    r2.append(point)
-
-
-print(r2)
-
-getSimilarity(route1, route2)"""
