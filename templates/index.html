@@ -40,11 +40,12 @@ var line;
       max: 100,
       values: [ 10, 50 ],
       slide: function( event, ui ) {
-        $( "#amount" ).val(ui.values[ 0 ] +"%" + " - %" + ui.values[ 1 ] );
+        $( "#amount" ).val(ui.values[ 0 ] +"%" + " - " + ui.values[ 1 ]+"%" );
+		console.log($( "#amount" ).val());
       }
     });
     $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) +"%" +
-      " - %" + $( "#slider-range" ).slider( "values", 1 ) );
+      " - " + $( "#slider-range" ).slider( "values", 1 )+"%" );
 	  
 
   } );
