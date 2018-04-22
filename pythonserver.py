@@ -27,7 +27,7 @@ def returnRoute():
         #endPoint = {'lat': '60.2055', 'lng': '24.6559'}
         
         #routes = osrm.getRoutesFromOSRM(startPoint, endPoint, "driving")
-        routes= handler.readRouteFromFile('1218616715718')
+        routes= handler.readRouteFromFile('1218625425687')
         print(routes)
         
         return jsonify(result=routes)	
