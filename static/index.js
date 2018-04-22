@@ -1,6 +1,5 @@
 
 function initMap() {
-	
 	var directionsService = new google.maps.DirectionsService;
 	var directionsDisplay = new google.maps.DirectionsRenderer;
 	map = new google.maps.Map(document.getElementById('map'), {
@@ -10,39 +9,34 @@ function initMap() {
 		maxZoom: 20
 	});
 	directionsDisplay.setMap(map);
-	
-	
 }
 
 function drawLine(data)
 {
 		console.log(data);
 		
-        var line = new google.maps.Polyline({
+        line = new google.maps.Polyline({
 		path: data,
 		strokeColor: "#FF0000",
 		strokeOpacity: 1.0,
 		strokeWeight: 10,
 		geodesic: true,
 		map: map});
-	
-	
+		
 }
-
-function drawRoute(){	
-	var jsonParameters={};
-	
-	jsonParameters["request_type"]="get_route";
-
-	var path;
-	para=JSON.stringify(jsonParameters);	
-	
-	$.getJSON('/get_route', {
-		request_type: "test",
+function selectRoute()
+{
+	$.getJSON('/select_route', {
+		route: $("#route").val()
 		}, function(data) {
-			
 				drawLine(data.result);
-				
-			});
-	
+		});
+
+	removeLine();
 }
+
+function removeLine() 
+{
+        line.setMap(null);
+}
+
