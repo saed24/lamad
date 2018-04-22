@@ -17,15 +17,18 @@ import handler
 
 def getSimilarity(route1, route2):
    
-    url = 'http://cs.uef.fi/mopsi/routes/similarityApi?param={"measure":"C-SIM","threshold":25,"A":'+str(route1)+',"B":'+str(route2)+'}'
+    url = 'http://cs.uef.fi/mopsi/routes/similarityApi/?param={"measure":"C-SIM","threshold":25,"A":'+str(route1)+',"B":'+str(route2)+'}'
     
     url2 = url.replace(" ","")
+    url2 = url2.replace("'",'"')
     print(url2)
     rep = urlopen(''.join(url2))
     parsed_json = json.loads(rep.read().decode('utf-8'))
     
     print(parsed_json)
 
+"""
+Testing
 route1 = handler.readRouteFromFileWOTimeAndAlt('1372602289525')
 route2 = handler.readRouteFromFileWOTimeAndAlt('1372604194383')
 
@@ -42,4 +45,4 @@ for x in range(0,3):
 
 print(r2)
 
-getSimilarity(r1, r2)
+getSimilarity(route1, route2)"""
