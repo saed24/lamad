@@ -9,11 +9,17 @@ var line;
 </script
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
 <script>window.jQuery || document.write('<script src="{{
   url_for('static', filename='jquery.js') }}">\x3C/script>') 
   </script>
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='test.css') }}">
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='jquery-ui.css') }}">
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='jquery-ui.min.css') }}">
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='jquery-ui.theme.css') }}">
+<link rel= "text/javascript" type= "text/css" href= "{{ url_for('static',filename='jquery-ui.js') }}">
 
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMRZn-B5chEqKJtJBeTekVDUTwLhjkWC0&callback=initMap">
@@ -23,9 +29,34 @@ var line;
 </head>
 
 <body>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 
+	<script>
+  $( function() {
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 0,
+      max: 100,
+      values: [ 10, 50 ],
+      slide: function( event, ui ) {
+        $( "#amount" ).val(ui.values[ 0 ] +"%" + " - %" + ui.values[ 1 ] );
+      }
+    });
+    $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) +"%" +
+      " - %" + $( "#slider-range" ).slider( "values", 1 ) );
+	  
+
+  } );
+  </script>
 <div id="map"></div>
+<p class="accuP">
+  <label for="amount">Accuracy:</label>
+  <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+</p>
 
+<div id="slider-range"> </div>
+<input type= "button" value="Remove Path">
 <select id = "route" name="event" onChange = "selectRoute()">
  <option value="1">Route 1</option>
  <option value="2">Route 2</option>
