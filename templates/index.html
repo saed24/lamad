@@ -6,6 +6,7 @@
 <script>
 var map;
 var line;
+var currentRoute;
 </script
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -41,7 +42,8 @@ var line;
       values: [ 10, 50 ],
       slide: function( event, ui ) {
         $( "#amount" ).val(ui.values[ 0 ] +"%" + " - " + ui.values[ 1 ]+"%" );
-		console.log($( "#amount" ).val());
+		//console.log($( "#amount" ).val());
+		cutRoute($( "#amount" ).val());
       }
     });
     $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) +"%" +
@@ -52,21 +54,22 @@ var line;
   </script>
 <div id="map"></div>
 <p class="accuP">
-  <label for="amount">Accuracy:</label>
+  <label for="amount">Remove part:</label>
   <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
 </p>
 
 <div id="slider-range"> </div>
-<input type= "button" value="Remove Path">
+
 <select id = "route" name="event" onChange = "selectRoute()">
  <option value="1">Route 1</option>
  <option value="2">Route 2</option>
  <option value="3">Route 3</option>
 </select>
 
+<input type = "button" value= "Predict" onClick = "predictRoute()"> <br>
 
-<input type = "button" value= "Add route" onClick = "drawRoute()">
-<input type = "button" value= "Add">
+<label for="probability">Probability:</label>
+<input type="text" id="probability" readonly style="border:0; color:#f6931f; font-weight:bold;">
 
 <!-- Replace the value of the key parameter with your own API key. -->
 

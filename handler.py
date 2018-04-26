@@ -6,6 +6,8 @@ Created on Mon Apr 16 09:49:34 2018
 """
 from math import sin, cos, sqrt, atan2, radians
 import os
+import GridPy as grid
+import frequency as f
 
 R = 6373.0 # approximate radius of earth in km
 
@@ -104,10 +106,40 @@ def DividingRoute(routes, A, B):
     return routes[A:B]
 
 def OuterRoute(routes, A, B):
+    
+    print('outer route')
     A=DividingRoute(routes,1,A)
     B=DividingRoute(routes,B,100)
     mergelist= A+B
-    return mergelist
+    return mergelist, A[-1], B[0]
 
+def Probability(route,route2,y):
 
+    grid_1=grid.pointsToWGSCells(route,4440)
+    grid_2=grid.pointsToWGSCells(route2,4440)
 
+    dict1=f.returnToDict(grid_1)
+    dict2=f.returnToDict(grid_2)
+
+    counter1=0
+    counter2=0
+
+    for k,v in y.items():
+        if k in dict1:
+            counter1=counter1+v
+            # print(counter1)
+            if k in dict2:
+                counter2=counter2+v
+
+    base=counter1+counter2
+    
+    print('probability handler')
+    
+    counter1=round((counter1/base)*100)
+    counter2=round((counter2/base)*100)
+    
+    if counter1>counter2:
+        return counter1 , route , route2
+    if counter2>counter1:
+        return counter2 , route2 , route
+    

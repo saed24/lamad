@@ -9,10 +9,10 @@ import json
 import urllib.request as urs
 import directionsdecode as dd
 
-def googledirections():
+def googledirections(lat1,lng1,lat2,lng2):
     
-    url2='https://maps.googleapis.com/maps/api/directions/json?&alternatives=true&mode=walking&origin='+str(62.6010)+ \
-    ','+str(29.7636)+'&destination='+str(60.1699)+','+str(24.9384)+  \
+    url2='https://maps.googleapis.com/maps/api/directions/json?&alternatives=true&mode=walking&origin='+str(lat1)+ \
+    ','+str(lng1)+'&destination='+str(lat2)+','+str(lng2)+  \
     '&key=AIzaSyBZKdJjHvjlTDNjM4LHaNgKmkQmSb0GmtA'
 
     ur = urs.urlopen(url2)
