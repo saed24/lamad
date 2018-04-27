@@ -111,6 +111,8 @@ def OuterRoute(routes, A, B):
     A=DividingRoute(routes,1,A)
     B=DividingRoute(routes,B,100)
     mergelist= A+B
+    print(A[-1])
+    print(B[0])
     return mergelist, A[-1], B[0]
 
 def Probability(route,route2,y):
@@ -132,6 +134,8 @@ def Probability(route,route2,y):
                 counter2=counter2+v
 
     base=counter1+counter2
+    if base==0:
+        base=1
     
     print('probability handler')
     

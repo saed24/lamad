@@ -47,25 +47,16 @@ function removeLine()
 
 
 
-function cutRoute(percent)
+function cutRoute(A, B)
 {
-	var numbers = percent.split('');
-	var num1 = percent[0];
-	var num2 = percent[1];
 	
-	num1 = num1.concat(num2);
-	var A = Number(num1);
-	
-	var num3 = percent[6];
-	var num4 = percent[7];
-	
-	num3 = num3.concat(num4);
-	var B = Number(num3);
-	console.log(B);
 	if(line != null)
 	{
 		removeLine();
 		var newRoute = dividingRoute(currentRoute, A, B);
+		
+		removedRoute = newRoute;
+		
 		
 		line = new google.maps.Polyline({
 			path: newRoute,
@@ -75,6 +66,9 @@ function cutRoute(percent)
 			geodesic: true,
 			map: map});
 	}
+	
+	
+	
 	
 }
 
@@ -97,27 +91,21 @@ function dividingRoute(route, A, B)
 
 function predictRoute()
 {
-	var percent = $( "#amount" ).val();
 	
-	var numbers = percent.split('');
-	var num1 = percent[0];
-	var num2 = percent[1];
-	
-	num1 = num1.concat(num2);
-	var AP = Number(num1);
-	
-	var num3 = percent[6];
-	var num4 = percent[7];
-	
-	num3 = num3.concat(num4);
-	var BP = Number(num3);
+	var newLine = new google.maps.Polyline({
+					path: removedRoute,
+					strokeColor: "#A9A9A9",
+					strokeOpacity: 1.0,
+					strokeWeight: 10,
+					geodesic: true,
+					map: map});
 	
 	$.getJSON('/predict_route', {
 		A: AP, B: BP 
 		}, function(data) {
 				$("#probability").val(data.probability);
 				removeLine();
-				
+				console.log(data);
 				var mostProbableLine = new google.maps.Polyline({
 					path: data.routePrint,
 					strokeColor: "#008000",

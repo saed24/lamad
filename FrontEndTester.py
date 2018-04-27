@@ -13,7 +13,7 @@ y=f.addPointsToDict('1')
 
 route=handler.readRouteFromFile('1216481888112')
 
-outroute, first, second =handler.OuterRoute(route,20,80)
+outroute, first, second =handler.OuterRoute(route,2,99)
 
 
 directions = gd.googledirections(first['lat'],first['lng'],second['lat'],second['lng'])
