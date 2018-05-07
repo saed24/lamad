@@ -5,6 +5,7 @@ import random, json
 import frequency as f
 import handler as handler
 import googledirections as gd
+import GridPy as gp
 
 app = Flask(__name__)
 filenames = ['1216464589688','1216468520320','1216481888112']
@@ -81,7 +82,12 @@ def predictRoute():
         print("test")
         ProbabilityOFPrintingRoute, RouteToPrint, AlternativeRoute= handler.Probability(directions[0],directions[1],y)
         print("test")
-        return jsonify(probability=ProbabilityOFPrintingRoute, routePrint=RouteToPrint, altRoute=AlternativeRoute)	
+        
+        linear= []
+        linear.append(first)
+        linear.append(second)
+        #RouteToPrint=gp.doWGSInterpolation(A,B,4440)
+        return jsonify(probability=ProbabilityOFPrintingRoute, routePrint=RouteToPrint, altRoute=AlternativeRoute, start=linear)	
     
     except Exception as e:
         print("exception")
