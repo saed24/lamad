@@ -26,7 +26,7 @@ def addPointsToDict(user):
         #print(filename)
         route = handler.readRouteFromFile(path+'/'+filename)
         
-        grid=GridPy.pointsToWGSCells(route,4440)
+        grid=GridPy.pointsToWGSCells(route,1000)
         addToDict(dicts, grid)
     
     return dicts
