@@ -161,9 +161,25 @@ function predictRoute()
 					strokeOpacity: 1.0,
 					strokeWeight: 2
 					});
-
+					
 					flightPath.setMap(map);
-
+				
+				for (var i = 0; i < data.centroids.length; i++) {
+				//	Add the circle for this city to the map.
+				//console.log(data.centroids[0])
+				//console.log(data.centroids[1])
+				
+				var cityCircle = new google.maps.Circle({
+				strokeColor: '#FF0000',
+				strokeOpacity: 0.8,
+				strokeWeight: 2,
+				fillColor: '#FF0000',
+				fillOpacity: 0.35,
+				map: map,
+				center: data.centroids[i],
+				radius: 25
+				})};
+				
 				});
 				
 	
