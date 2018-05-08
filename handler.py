@@ -107,19 +107,36 @@ def DividingRoute(routes, A, B):
 
 def OuterRoute(routes, A, B):
     
-    print('outer route')
+    #print('outer route')
     A=DividingRoute(routes,1,A)
     B=DividingRoute(routes,B,100)
     mergelist= A+B
-    print(A[-1])
-    print(B[0])
+    #print(A[-1])
+    #print(B[0])
     return mergelist, A[-1], B[0]
 
 def Probability(route,route2,y):
 
-    grid_1=grid.pointsToWGSCells(route,4440)
-    grid_2=grid.pointsToWGSCells(route2,4440)
-
+    grid_1=grid.pointsToWGSCells(route,1000)
+    grid_2=grid.pointsToWGSCells(route2,1000)
+    centroids=[]
+    
+    print("1")
+    for x in range(0, len(grid_1)):
+        centroid={}
+        #print("1")
+        centroid["_id"] = x
+        #print("2")
+        centroid["lat"] = round((float(int(grid_1[x]['northing'])/1000)),8)
+        #print("3")
+        centroid["lng"] = round((float(int(grid_1[x]['easting'])/1000)),8)
+        #print("4")
+        #print(round((float(int(grid_1[x]['lat'])/4440)),4))
+        #print(round((float(int(grid_1[x]['lng'])/4440)),4))
+        centroids.append(centroid)
+        #print("5")
+    
+    #print(centroid)
     dict1=f.returnToDict(grid_1)
     dict2=f.returnToDict(grid_2)
 
@@ -137,13 +154,13 @@ def Probability(route,route2,y):
     if base==0:
         base=1
     
-    print('probability handler')
+    #print('probability handler')
     
     counter1=round((counter1/base)*100)
     counter2=round((counter2/base)*100)
     
     if counter1>counter2:
-        return counter1 , route , route2
+        return counter1 , route , route2 , centroids
     if counter2>counter1:
-        return counter2 , route2 , route
+        return counter2 , route2 , route , centroids
     

@@ -20,6 +20,8 @@ def pointsToWGSCells(points, zoomLevel):
         cell["lat"] = E
         cell["lng"] = N
         cell["interpolation"] = 0
+        #cell["org_lat"]=obj["lat"]
+        #cell["org_lng"]=obj["lng"] 
         if (prevCell != None):
             newCells = doWGSInterpolation(prevCell, cell, zoomLevel)
             for k,obj2 in enumerate(newCells):
