@@ -22,6 +22,7 @@ var removedRoute;
   url_for('static', filename='jquery.js') }}">\x3C/script>') 
   </script>
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='test.css') }}">
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='loading.css') }}">
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='jquery-ui.css') }}">
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='jquery-ui.min.css') }}">
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='jquery-ui.theme.css') }}">
@@ -57,12 +58,19 @@ var removedRoute;
 	  
 
   } );
+  
+  $( document ).ready(function() {
+    $('#loadingmessage').hide();
+});
+  
   </script>
 <div id="map"></div>
 <p class="accuP">
   <label for="amount">Remove part:</label>
   <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
 </p>
+
+<div id = "loadingmessage" class="loading">Loading&#8230;</div>
 
 <div id="slider-range"> </div>
 

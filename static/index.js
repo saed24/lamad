@@ -99,26 +99,8 @@ function predictRoute()
 					strokeWeight: 10,
 					geodesic: true,
 					map: map});
-	
-/*	$.ajax({
-		//progressbar start
-		xhr: function () {
-        var xhr = $.ajaxSettings.xhr();
-        xhr.onprogress = function e() {
-            // For downloads
-            if (e.lengthComputable) {
-                console.log(e.loaded / e.total);
-            }
-        };
-        xhr.upload.onprogress = function (e) {
-            // For uploads
-            if (e.lengthComputable) {
-                console.log(e.loaded / e.total);
-            }
-        };
-        return xhr;
-		},
-		//progressbar end
+	/*
+	$.ajax({
 		dataType: "json",
 		url: '/predict_route',
 		data: {A: AP, B: BP},
@@ -143,8 +125,9 @@ function predictRoute()
 				map: map});	
 				//getSimilarity(removedRoute, data.routePrint);
 				}
-	});
-*/
+	});*/
+
+	$('#loadingmessage').show();
 	$.getJSON('/predict_route', {
 		A: AP, B: BP 
 		}, function(data) {
@@ -168,7 +151,7 @@ function predictRoute()
 					map: map});	
 					//getSimilarity(removedRoute, data.routePrint);
 				console.log(data.start);
-
+				$('#loadingmessage').hide();
 				//var flightPlanCoordinates = data.first.concat(data.second);
 				//var flightPlanCoordinates = data.start+data.end;
 				var flightPath = new google.maps.Polyline({
