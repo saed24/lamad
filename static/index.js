@@ -29,7 +29,6 @@ function selectRoute()
 		route: $("#route").val()
 		}, function(data) {
 				currentRoute = data.result;
-				//console.log(currentRoute.length);
 				drawLine();
 				
 		});
@@ -56,8 +55,6 @@ function cutRoute(A, B)
 		var newRoute = dividingRoute(currentRoute, A, B);
 		
 		removedRoute = newRoute;
-		
-		
 		line = new google.maps.Polyline({
 			path: newRoute,
 			strokeColor: "#FF0000",
@@ -65,11 +62,7 @@ function cutRoute(A, B)
 			strokeWeight: 10,
 			geodesic: true,
 			map: map});
-	}
-	
-	
-	
-	
+	}	
 }
 
 function outerRoute(route, A, B)
@@ -89,9 +82,20 @@ function dividingRoute(route, A, B)
 	return route.slice(A,B)
 }
 
+function linearInterpolation(coordinates)
+{
+	var flightPath = new google.maps.Polyline({
+		path: coordinates,
+		geodesic: true,
+		strokeColor: '#FF0000',
+		strokeOpacity: 1.0,
+		strokeWeight: 2,
+		map: map
+		});
+}
+
 function predictRoute()
 {
-	
 	var newLine = new google.maps.Polyline({
 					path: removedRoute,
 					strokeColor: "#A9A9A9",
@@ -99,33 +103,6 @@ function predictRoute()
 					strokeWeight: 10,
 					geodesic: true,
 					map: map});
-	/*
-	$.ajax({
-		dataType: "json",
-		url: '/predict_route',
-		data: {A: AP, B: BP},
-		success: function(data) {
-			$("#probability").val(data.probability);
-			removeLine();
-			console.log(data);
-			var mostProbableLine = new google.maps.Polyline({
-				path: data.routePrint,
-				strokeColor: "#008000",
-				strokeOpacity: 1.0,
-				strokeWeight: 10,
-				geodesic: true,
-				map: map});
-					
-			var altline = new google.maps.Polyline({
-				path: data.altRoute,
-				strokeColor: "#0000ff",
-				strokeOpacity: 1.0,
-				strokeWeight: 10,
-				geodesic: true,
-				map: map});	
-				//getSimilarity(removedRoute, data.routePrint);
-				}
-	});*/
 
 	$('#loadingmessage').show();
 	$.getJSON('/predict_route', {
@@ -152,37 +129,30 @@ function predictRoute()
 					//getSimilarity(removedRoute, data.routePrint);
 				console.log(data.start);
 				$('#loadingmessage').hide();
-				//var flightPlanCoordinates = data.first.concat(data.second);
-				//var flightPlanCoordinates = data.start+data.end;
-				var flightPath = new google.maps.Polyline({
-					path: data.start,
-					geodesic: true,
-					strokeColor: '#FF0000',
-					strokeOpacity: 1.0,
-					strokeWeight: 2
-					});
-					
-					flightPath.setMap(map);
+		
+				linearInterpolation(data.start);
 				
-				for (var i = 0; i < data.centroids.length; i++) {
-				//	Add the circle for this city to the map.
-				//console.log(data.centroids[0])
-				//console.log(data.centroids[1])
+				drawGrid(data.centroids);
 				
-				var cityCircle = new google.maps.Circle({
-				strokeColor: '#FF0000',
-				strokeOpacity: 0.8,
-				strokeWeight: 2,
-				fillColor: '#FF0000',
-				fillOpacity: 0.35,
-				map: map,
-				center: data.centroids[i],
-				radius: 25
-				})};
+		});
+}
+
+function drawGrid(coordinates)
+{
+	for (var i = 0; i < coordinates.length; i++) 
+	{
+		var cityCircle = new google.maps.Circle({
+		strokeColor: '#FF0000',
+		strokeOpacity: 0.8,
+		strokeWeight: 2,
+		fillColor: '#FF0000',
+		fillOpacity: 0.35,
+		map: map,
+		center: coordinates[i],
+		radius: 25
+		});
 				
-				});
-				
-	
+	}
 }
 
 function getSimilarity(r1, r2)
