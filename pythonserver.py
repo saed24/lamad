@@ -82,11 +82,11 @@ def predictRoute():
         print("test2")
         centroids=[]
         ProbabilityOFPrintingRoute, RouteToPrint, AlternativeRoute, centroids= handler.Probability2(directions,y) #resolve the hard coding for two alternatives
-        print(ProbabilityOFPrintingRoute)
-        print(centroids)
-        print(AlternativeRoute)
-        print(RouteToPrint)
-        ProbabilityOFPrintingRoute, RouteToPrint, AlternativeRoute, centroids= handler.Probability(directions[0],directions[1],y) #resolve the hard coding for two alternatives
+        #sprint(ProbabilityOFPrintingRoute)
+        #print(centroids)
+        #print(AlternativeRoute)
+        #print(RouteToPrint)
+        #ProbabilityOFPrintingRoute, RouteToPrint, AlternativeRoute, centroids= handler.Probability(directions[0],directions[1],y) #resolve the hard coding for two alternatives
         #print("test")
         #print(centroids)
         linear= []

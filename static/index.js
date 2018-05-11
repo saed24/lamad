@@ -51,12 +51,25 @@ function cutRoute(A, B)
 	
 	if(line != null)
 	{
+		if(aline != null && bline != null)
+		{
+			aline.setMap(null);
+			bline.setMap(null);
+		}
 		removeLine();
-		var newRoute = dividingRoute(currentRoute, A, B);
+		var newRoute = outerRoute(currentRoute, A, B);
 		
 		removedRoute = newRoute;
-		line = new google.maps.Polyline({
-			path: newRoute,
+		aline = new google.maps.Polyline({
+			path: newRoute[0],
+			strokeColor: "#FF0000",
+			strokeOpacity: 1.0,
+			strokeWeight: 10,
+			geodesic: true,
+			map: map});
+			
+		bline = new google.maps.Polyline({
+			path: newRoute[1],
 			strokeColor: "#FF0000",
 			strokeOpacity: 1.0,
 			strokeWeight: 10,
@@ -69,9 +82,9 @@ function outerRoute(route, A, B)
 {
 	A=dividingRoute(route,1,A);
     B=dividingRoute(route,B,100);
-    var mergelist= A+B;
-	//console.log(A);
-	return mergelist;
+    var mergelist= A.concat(B);
+	console.log(A);
+	return [A,B];
 }
 
 function dividingRoute(route, A, B)
@@ -119,13 +132,17 @@ function predictRoute()
 					geodesic: true,
 					map: map});
 					
+				for(var i = 0; i < data.altRoute.length; i++){
+				
 				var altline = new google.maps.Polyline({
-					path: data.altRoute,
+					path: data.altRoute[i],
 					strokeColor: "#0000ff",
 					strokeOpacity: 1.0,
 					strokeWeight: 10,
 					geodesic: true,
 					map: map});	
+					
+				}
 					//getSimilarity(removedRoute, data.routePrint);
 				console.log(data.start);
 				$('#loadingmessage').hide();
