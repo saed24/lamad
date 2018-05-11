@@ -77,10 +77,15 @@ def predictRoute():
         B = int(B)
         #print(route)
         outroute, first, second =handler.OuterRoute(route,A,B)
-        #print("test")
+        print("test1")
         directions = gd.googledirections(first['lat'],first['lng'],second['lat'],second['lng'])
-        #print("test")
+        print("test2")
         centroids=[]
+        ProbabilityOFPrintingRoute, RouteToPrint, AlternativeRoute, centroids= handler.Probability2(directions,y) #resolve the hard coding for two alternatives
+        print(ProbabilityOFPrintingRoute)
+        print(centroids)
+        print(AlternativeRoute)
+        print(RouteToPrint)
         ProbabilityOFPrintingRoute, RouteToPrint, AlternativeRoute, centroids= handler.Probability(directions[0],directions[1],y) #resolve the hard coding for two alternatives
         #print("test")
         #print(centroids)
@@ -91,8 +96,9 @@ def predictRoute():
         return jsonify(probability=ProbabilityOFPrintingRoute, routePrint=RouteToPrint, altRoute=AlternativeRoute, start=linear,centroids=centroids)	
     
     except Exception as e:
-        print("exception")
+        print(e)
         return str(e)
+    
 
 if __name__ == "__main__":
     app.run()

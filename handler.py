@@ -124,19 +124,11 @@ def Probability(route,route2,y):
     print("1")
     for x in range(0, len(grid_1)):
         centroid={}
-        #print("1")
         centroid["_id"] = x
-        #print("2")
         centroid["lat"] = round((float(int(grid_1[x]['northing'])/1000)),8)
-        #print("3")
         centroid["lng"] = round((float(int(grid_1[x]['easting'])/1000)),8)
-        #print("4")
-        #print(round((float(int(grid_1[x]['lat'])/4440)),4))
-        #print(round((float(int(grid_1[x]['lng'])/4440)),4))
         centroids.append(centroid)
-        #print("5")
     
-    #print(centroid)
     dict1=f.returnToDict(grid_1)
     dict2=f.returnToDict(grid_2)
 
@@ -164,3 +156,49 @@ def Probability(route,route2,y):
     if counter2>counter1:
         return counter2 , route2 , route , centroids
     
+
+
+def Probability2(route : list ,y):
+    print(len(route))
+    print(type(route))
+    grid_1=[]
+    dict_1=[]
+
+    for x in range(0, len(route)):
+        
+        print(route[x])
+        grid_1.append(grid.pointsToWGSCells(route[x],1000))
+        print(grid_1[x])
+        dict_1.append(f.returnToDict(grid_1[x]))
+    
+    counter=[0]*len(dict_1)
+
+    for k,v in y.items():
+        for z in range(0, len(dict_1)):
+            if k in dict_1[z]:
+                counter[z]=counter[z]+v
+    
+    
+    centroids=[]
+    index_of_max=counter.index(max(counter))
+    base=sum(counter)
+    if base==0:
+        base=1
+    
+    for x in range(0, len(counter)):
+        counter[x]=round((counter[x]/base)*100)
+    
+    for x in range(0, len(grid_1[index_of_max])):
+        centroid={}
+        centroid["_id"] = x
+        centroid["lat"] = round((float(int(grid_1[index_of_max][x]['northing'])/1000)),8)
+        centroid["lng"] = round((float(int(grid_1[index_of_max][x]['easting'])/1000)),8)
+        centroids.append(centroid)
+    
+        return counter[index_of_max] , route[index_of_max], route[~index_of_max] , centroids
+
+
+
+
+
+
