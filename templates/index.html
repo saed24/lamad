@@ -14,6 +14,8 @@ var BP = 100;
 var removedRoute;
 var aline;
 var bline;
+var markerA;
+var markerB;
 </script
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -45,9 +47,9 @@ var bline;
   $( function() {
     $( "#slider-range" ).slider({
       range: true,
-      min: 0,
-      max: 100,
-      values: [ 0, 100 ],
+      min: 3,
+      max: 99,
+      values: [ 50, 51 ],
       slide: function( event, ui ) {
         $( "#amount" ).val(ui.values[ 0 ] +"%" + " - " + ui.values[ 1 ]+"%" );
 		cutRoute(ui.values[0],ui.values[1]);

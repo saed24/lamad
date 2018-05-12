@@ -75,7 +75,48 @@ function cutRoute(A, B)
 			strokeWeight: 10,
 			geodesic: true,
 			map: map});
-	}	
+			
+		customMarkers(newRoute[0], newRoute[1]);
+	}
+}
+
+function customMarkers(A, B)
+{
+	var iconBase = '/static/';
+	
+	var iconA = {
+    url: iconBase + 'markerA.png', // url
+    scaledSize: new google.maps.Size(40, 40), // scaled size
+    origin: new google.maps.Point(0,0), // origin
+    anchor: new google.maps.Point(0, 0) // anchor
+	};
+	
+	var iconB = {
+    url: iconBase + 'markerB.png', // url
+    scaledSize: new google.maps.Size(40,40), // scaled size
+    origin: new google.maps.Point(0,0), // origin
+    anchor: new google.maps.Point(0, 0) // anchor
+	};
+	
+
+
+	
+	if(markerA != null && markerB != null)
+	{
+		markerA.setMap(null);
+		markerB.setMap(null);
+	}
+	
+	markerA = new google.maps.Marker({
+            position: A[A.length-1],
+            icon: iconA,
+            map: map
+          });
+	markerB = new google.maps.Marker({
+            position: B[0],
+            icon: iconB,
+            map: map
+          });	
 }
 
 function outerRoute(route, A, B)

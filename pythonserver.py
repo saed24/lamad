@@ -77,18 +77,9 @@ def predictRoute():
         B = int(B)
         #print(route)
         outroute, first, second =handler.OuterRoute(route,A,B)
-        print("test1")
         directions = gd.googledirections(first['lat'],first['lng'],second['lat'],second['lng'])
-        print("test2")
         centroids=[]
         ProbabilityOFPrintingRoute, RouteToPrint, AlternativeRoute, centroids= handler.Probability2(directions,y) #resolve the hard coding for two alternatives
-        #sprint(ProbabilityOFPrintingRoute)
-        #print(centroids)
-        #print(AlternativeRoute)
-        #print(RouteToPrint)
-        #ProbabilityOFPrintingRoute, RouteToPrint, AlternativeRoute, centroids= handler.Probability(directions[0],directions[1],y) #resolve the hard coding for two alternatives
-        #print("test")
-        #print(centroids)
         linear= []
         linear.append(first)
         linear.append(second)
