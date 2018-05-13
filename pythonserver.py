@@ -79,12 +79,12 @@ def predictRoute():
         outroute, first, second =handler.OuterRoute(route,A,B)
         directions = gd.googledirections(first['lat'],first['lng'],second['lat'],second['lng'])
         centroids=[]
-        ProbabilityOFPrintingRoute, RouteToPrint, AlternativeRoute, centroids= handler.Probability2(directions,y) #resolve the hard coding for two alternatives
+        ProbabilityOFPrintingRoute, RouteToPrint, index_max, centroids= handler.Probability2(directions,y) #resolve the hard coding for two alternatives
         linear= []
         linear.append(first)
         linear.append(second)
         #RouteToPrint=gp.doWGSInterpolation(A,B,4440)
-        return jsonify(probability=ProbabilityOFPrintingRoute, routePrint=RouteToPrint, altRoute=AlternativeRoute, start=linear,centroids=centroids)	
+        return jsonify(probability=ProbabilityOFPrintingRoute, routePrint=RouteToPrint, index_max=index_max, start=linear,centroids=centroids)	
     
     except Exception as e:
         print(e)

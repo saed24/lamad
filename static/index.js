@@ -16,9 +16,9 @@ function drawLine()
 	
         line = new google.maps.Polyline({
 		path: currentRoute,
-		strokeColor: "#FF0000",
-		strokeOpacity: 1.0,
-		strokeWeight: 10,
+		strokeColor: "#000000",
+		strokeOpacity: .75,
+		strokeWeight: 8,
 		geodesic: true,
 		map: map});
 		
@@ -59,20 +59,20 @@ function cutRoute(A, B)
 		removeLine();
 		var newRoute = outerRoute(currentRoute, A, B);
 		
-		removedRoute = newRoute;
+		removedRoute = dividingRoute(currentRoute,A,B);
 		aline = new google.maps.Polyline({
 			path: newRoute[0],
-			strokeColor: "#FF0000",
-			strokeOpacity: 1.0,
-			strokeWeight: 10,
+			strokeColor: "#000000",
+			strokeOpacity: .75,
+			strokeWeight: 8,
 			geodesic: true,
 			map: map});
 			
 		bline = new google.maps.Polyline({
 			path: newRoute[1],
-			strokeColor: "#FF0000",
-			strokeOpacity: 1.0,
-			strokeWeight: 10,
+			strokeColor: "#000000",
+			strokeOpacity: .75,
+			strokeWeight: 8,
 			geodesic: true,
 			map: map});
 			
@@ -141,9 +141,9 @@ function linearInterpolation(coordinates)
 	var flightPath = new google.maps.Polyline({
 		path: coordinates,
 		geodesic: true,
-		strokeColor: '#FF0000',
-		strokeOpacity: 1.0,
-		strokeWeight: 2,
+		strokeColor: '#696969',
+		strokeOpacity: .75,
+		strokeWeight: 8,
 		map: map
 		});
 }
@@ -153,8 +153,8 @@ function predictRoute()
 	var newLine = new google.maps.Polyline({
 					path: removedRoute,
 					strokeColor: "#A9A9A9",
-					strokeOpacity: 1.0,
-					strokeWeight: 10,
+					strokeOpacity: .75,
+					strokeWeight: 8,
 					geodesic: true,
 					map: map});
 
@@ -164,34 +164,34 @@ function predictRoute()
 		}, function(data) {
 				$("#probability").val(data.probability);
 				removeLine();
-				console.log(data);
+				//console.log(data);
+					
+				for(var i = 0; i < data.routePrint.length; i++){
+				if(i != data.index_max){
+				var altline = new google.maps.Polyline({
+					path: data.routePrint[i],
+					strokeColor: "#696969",
+					strokeOpacity: .75,
+					strokeWeight: 8,
+					geodesic: true,
+					map: map});	
+				}
+				}
 				var mostProbableLine = new google.maps.Polyline({
-					path: data.routePrint,
+					path: data.routePrint[data.index_max],
 					strokeColor: "#008000",
-					strokeOpacity: 1.0,
+					strokeOpacity: 1,
 					strokeWeight: 10,
 					geodesic: true,
 					map: map});
-					
-				for(var i = 0; i < data.altRoute.length; i++){
-				
-				var altline = new google.maps.Polyline({
-					path: data.altRoute[i],
-					strokeColor: "#0000ff",
-					strokeOpacity: 1.0,
-					strokeWeight: 10,
-					geodesic: true,
-					map: map});	
-					
-				}
 					//getSimilarity(removedRoute, data.routePrint);
-				console.log(data.start);
+
 				$('#loadingmessage').hide();
 		
 				linearInterpolation(data.start);
 				
 				drawGrid(data.centroids);
-				
+				console.log(data.centroids)
 		});
 }
 
