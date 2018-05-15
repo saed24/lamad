@@ -182,6 +182,9 @@ def Probability2(route : list ,y):
     if base==0:
         base=1
     
+    print(counter)
+    print(index_of_max)
+    print(counter[index_of_max])
     for g in range(0, len(counter)):
         counter[g]=round((counter[g]/base)*100)
 

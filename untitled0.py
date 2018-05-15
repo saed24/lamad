@@ -24,7 +24,7 @@ directions = gd.googledirections(first['lat'],first['lng'],second['lat'],second[
 centroids=[]
 
 ProbabilityOFPrintingRoute, RouteToPrint, AlternativeRoute, centroids= handler.Probability2(directions,y) #resolve the hard coding for two alternatives
-#print(RouteToPrint[1])
+print(RouteToPrint)
 #print("############################################################################")
 #print(RouteToPrint[2])
 #print("############################################################################")

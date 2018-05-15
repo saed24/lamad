@@ -184,7 +184,12 @@ function predictRoute()
 					strokeWeight: 10,
 					geodesic: true,
 					map: map});
-					//getSimilarity(removedRoute, data.routePrint);
+					console.log("begin");
+					console.log(removedRoute);
+					console.log("###############################################################");
+					console.log(data.routePrint[data.index_max]);
+					console.log("end");
+					getSimilarity(removedRoute, data.routePrint[data.index_max]);
 
 				$('#loadingmessage').hide();
 		
@@ -225,9 +230,28 @@ function getSimilarity(r1, r2)
 	
 	var dataString="param="+JSON.stringify(param);
 	
-	$.post(url, {data: dataString})
+	/*$.post(url, {data: dataString})
 	.done(function(data){
 		console.log(data);
 	});
+	*/
+	httpPostAsync(url, dataString, function(data){ 
+	
+	var similarityPercent = eval("(" +data+ ")");
+	$("#Similarity").val(similarityPercent['similarity']);
+	console.log(similarityPercent['similarity']);
+	});
 
+}
+
+function httpPostAsync(url, dataString, callback){
+	var request = new XMLHttpRequest();
+	request.open('POST', url, true);
+	request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	request.onreadystatechange = function() { 
+        if (request.readyState == 4 && request.status == 200){
+            callback(request.responseText);
+		}
+    }
+	request.send( dataString );
 }
