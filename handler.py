@@ -48,7 +48,7 @@ def readRouteFromFileWOTimeAndAlt(filepath):
     return routes
 
 def readRoutesFromFolder():
-    path = './MopsiRoutes2014/routes/13/'
+    path = './MopsiRoutes2014/routes/1/'
     routes2 = []  
     counter = 0  
     for filename in os.listdir(path):
@@ -195,7 +195,7 @@ def Probability2(route : list ,y):
         centroid["lng"] = round((float(int(grid_1[index_of_max][h]['easting'])/1000)),8)
         centroids.append(centroid)
         
-    return counter[index_of_max] , route, index_of_max , centroids
+    return counter, route, index_of_max , centroids
 
 
 

@@ -10,6 +10,7 @@ Created on Fri May 11 21:32:20 2018
 import frequency as f
 import handler as handler
 import googledirections as gd
+import json
 
 y=f.addPointsToDict('1')
 
@@ -18,6 +19,14 @@ A = 20
 B = 90
 #print(route)
 outroute, first, second =handler.OuterRoute(route,A,B)
+
+newlist=[]
+newlist.append( str(first['lat']) + "," + str(first['lng']))
+newlist.append(str(second['lat']) + "," + str(second['lng']))
+newlist.append("1")
+
+with open('data.txt', 'w') as outfile:
+    json.dump(newlist, outfile)
 
 directions = gd.googledirections(first['lat'],first['lng'],second['lat'],second['lng'])
 
