@@ -1,0 +1,10 @@
+#parent_div_1, #parent_div_2, #parent_div_3{
+    width:100px;
+    height:100px;
+    margin-right:100px;
+    float:left;
+}
+.child_div_1{
+    float:left;
+    margin-right:5px;
+}

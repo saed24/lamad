@@ -32,7 +32,9 @@ function selectRoute()
 				drawLine();
 				
 		});
-
+	
+	
+	
 	if(line != null)
 	{
 		removeLine();
@@ -124,7 +126,7 @@ function outerRoute(route, A, B)
 	A=dividingRoute(route,1,A);
     B=dividingRoute(route,B,100);
     var mergelist= A.concat(B);
-	console.log(A);
+	//console.log(A);
 	return [A,B];
 }
 
@@ -150,7 +152,6 @@ function linearInterpolation(coordinates)
 }
 
 
-var myJson;
 var mostProbableLine;
 function predictRoute()
 {
@@ -164,9 +165,11 @@ function predictRoute()
 				removeLine();
 				probablelines()
 				$('#loadingmessage').hide();
+				document.getElementById("parent_div_1").innerHTML = createCheckboxes(data);
 		});
+	
 }
-var newLine
+var newLine;
 function originalroute()
 {
 	newLine = new google.maps.Polyline({
@@ -181,30 +184,61 @@ function originalroute()
 
 var altline;
 var counter=0;
-function alternativeroutes()
+
+
+
+function createCheckboxes(data)
 {
-				if(counter == myJson.index_max)
-				{
-					counter++;
-				}
-				
-				if(counter == myJson.routePrint.length)
-				{
-				counter=0;
-				}
-					
-				console.log(counter);
-				altline = new google.maps.Polyline({
-				path: myJson.routePrint[counter],
+	var html = "<h4>Options</h1> <label class='container'>Predicted Route"+ 
+	"<input type='checkbox' checked='checked' id='checkbox1' onclick='checkboxfunction1()'>" +
+	"<span class='checkmark'></span> </label>"  +
+	"<label class='container'>Linear Route" +
+	"<input type='checkbox' id='checkbox2' onclick='checkboxfunction2()'>" +
+	"<span class='checkmark'></span></label>" +
+	"<label class='container'>Original Route" +
+	"<input type='checkbox' id='checkbox4' onclick='checkboxfunction4()'>"+
+	"<span class='checkmark'></span></label>";
+	console.log(data.routePrint.length);
+	for(var i = 0; i < data.routePrint.length; i++)
+	{
+		if( i !== data.index_max)
+		{
+			html += "<label class='container'>Alternative Route " +(i+1)+
+			"<input type='checkbox' id='altCheckbox"+i+"'  onclick='alternativeCheckbox("+JSON.stringify(data.routePrint[i])+", "+JSON.stringify(i)+")'>" +
+			"<span class='checkmark'></span> </label>" ;
+			//altLine=data.routePrint[i];
+		}
+	}
+
+	return html;
+}
+
+function alternativeCheckbox(route,checkBoxNo)
+{
+	console.log(route);
+
+	var checkBox = document.getElementById("altCheckbox"+checkBoxNo);
+
+  // If the checkbox is checked, display the output text
+	if (checkBox.checked == true){
+		console.log("true");
+		altline = new google.maps.Polyline({
+				path: route,
 				strokeColor: "#696969",
 				strokeOpacity: .75,
 				strokeWeight: 8,
 				geodesic: true,
 				map: map});	
-				getSimilarity(removedRoute, myJson.routePrint[counter]);
-				$("#probability").val(myJson.probability[counter]);
-				counter++;
+		getSimilarity(removedRoute, myJson.routePrint[checkBoxNo]);
+					
+					$("#probability").val(myJson.probability[checkBoxNo]);
+	} 
+	else 
+	{
+	  altline.setMap(null);
+	}
 }
+
 function probablelines()
 {
 					mostProbableLine = new google.maps.Polyline({
@@ -215,16 +249,17 @@ function probablelines()
 					geodesic: true,
 					map: map});
 					console.log("begin");
-					console.log(removedRoute);
-					console.log("###############################################################");
-					console.log(myJson.routePrint[myJson.index_max]);
-					console.log("end");
+					//console.log(removedRoute);
+					//console.log("###############################################################");
+					//console.log(myJson.routePrint[myJson.index_max]);
+					//console.log("end");
 					getSimilarity(removedRoute, myJson.routePrint[myJson.index_max]);
 					drawGrid(myJson.centroids);
 					$("#probability").val(myJson.probability[myJson.index_max]);
 }
 
 var cityCircle=[];
+
 function drawGrid(coordinates)
 {
 	for (var i = 0; i < coordinates.length; i++) 
@@ -247,7 +282,7 @@ function removeGrid(coordinates)
 	for (var i = 0; i < coordinates.length; i++) 
 	{
 		cityCircle[i].setMap(null);
-		console.log(i);
+		//console.log(i);
 				
 	}
 }
@@ -273,7 +308,7 @@ function getSimilarity(r1, r2)
 	
 	var similarityPercent = eval("(" +data+ ")");
 	$("#Similarity").val(similarityPercent['similarity']);
-	console.log(similarityPercent['similarity']);
+	//console.log(similarityPercent['similarity']);
 	});
 
 }
@@ -338,3 +373,30 @@ function checkboxfunction4() {
 	  newLine.setMap(null);
   }
 }
+
+function alternativeroutes()
+{
+				if(counter == myJson.index_max)
+				{
+					counter++;
+				}
+				
+				if(counter == myJson.routePrint.length)
+				{
+				counter=0;
+				}
+					
+				//console.log(counter);
+				altline = new google.maps.Polyline({
+				path: myJson.routePrint[counter],
+				strokeColor: "#696969",
+				strokeOpacity: .75,
+				strokeWeight: 8,
+				geodesic: true,
+				map: map});	
+				getSimilarity(removedRoute, myJson.routePrint[counter]);
+				$("#probability").val(myJson.probability[counter]);
+				counter++;
+}
+
+
